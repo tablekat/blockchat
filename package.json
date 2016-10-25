@@ -21,6 +21,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "express-session": "^1.14.0",
+    "matter-js": "^0.10.0",
     "passport": "^0.3.2",
     "rand-token": "^0.2.1",
     "request-promise": "^3.0.0",

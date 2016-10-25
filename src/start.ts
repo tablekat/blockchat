@@ -16,7 +16,7 @@ io.on('connection', function(socket){
 
   var onUpdate = () => {
     socket.emit('update-messages', {
-      msgs: messageSystem.messages,
+      msgs: messageSystem.messages.map(m => m.serializeable()),
     });
   };
 
@@ -29,7 +29,7 @@ io.on('connection', function(socket){
 
   socket.on('new-message', function({ msg }){
     msg = new Message(msg);
-    socket.broadcast.emit('new-message', { msg });
+    socket.broadcast.emit('new-message', { msg: msg.serializeable() });
     messageSystem.add(msg);
   });
 

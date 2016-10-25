@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Message } from './Message';
+import { Message, SpecialStyles } from './Message';
 
 export interface MessageObjectProps {
   msg: Message;
@@ -8,11 +8,12 @@ export interface MessageObjectProps {
 export class MessageComponent extends React.Component<MessageObjectProps, {}> {
   render() {
 
-    var style = {
+    var style = (Object as any).assign({}, {
       position: 'absolute',
-      top: this.props.msg.y,
+      top: window.innerHeight - this.props.msg.y,
       left: this.props.msg.x,
-    };
+      zIndex: 100,
+    }, SpecialStyles(this.props.msg));
 
     return (
       <div className="display-message" style={style}>

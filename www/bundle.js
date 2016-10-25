@@ -2069,14 +2069,49 @@
 	        this.y = y;
 	        this.dx = dx;
 	        this.dy = dy;
+	        this.width = 0;
+	        this.height = 0;
 	    }
 	    Message.prototype.setText = function (t) {
 	        this.text = t;
 	        return this;
 	    };
+	    Message.prototype.setSize = function (width, height) {
+	        this.width = width;
+	        this.height = height;
+	        return this;
+	    };
 	    return Message;
 	}());
 	exports.Message = Message;
+	function SpecialStyles(msg) {
+	    if (msg.text.match(/fancy/)) {
+	        return {
+	            fontFamily: 'Lobster',
+	        };
+	    }
+	    if (msg.text.match(/(robot|bee+p|boop)/)) {
+	        return {
+	            fontFamily: 'Orbitron',
+	        };
+	    }
+	    if (msg.text.match(/(pencil)/)) {
+	        return {
+	            fontFamily: 'Homemade Apple',
+	        };
+	    }
+	    if (msg.text.match(/(heavy)/)) {
+	        return {
+	            fontWeight: 'bold',
+	        };
+	    }
+	    if (msg.text.match(/(light)/)) {
+	        return {
+	            opacity: 0.7,
+	        };
+	    }
+	}
+	exports.SpecialStyles = SpecialStyles;
 
 
 /***/ },
@@ -2117,17 +2152,19 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var React = __webpack_require__(1);
+	var Message_1 = __webpack_require__(98);
 	var MessageComponent = (function (_super) {
 	    __extends(MessageComponent, _super);
 	    function MessageComponent() {
 	        _super.apply(this, arguments);
 	    }
 	    MessageComponent.prototype.render = function () {
-	        var style = {
+	        var style = Object.assign({}, {
 	            position: 'absolute',
-	            top: this.props.msg.y,
+	            top: window.innerHeight - this.props.msg.y,
 	            left: this.props.msg.x,
-	        };
+	            zIndex: 100,
+	        }, Message_1.SpecialStyles(this.props.msg));
 	        return (React.createElement("div", {className: "display-message", style: style}, this.props.msg.text));
 	    };
 	    return MessageComponent;
@@ -2147,36 +2184,120 @@
 	};
 	var React = __webpack_require__(1);
 	var Message_1 = __webpack_require__(98);
+	var OFFSET_MOUSE = 15;
 	var styles = {
 	    container: {
 	        position: 'absolute',
+	        padding: 10,
+	        borderRadius: 7,
+	        border: '1px solid #ccc',
+	        background: '#eee',
+	        display: 'flex',
+	        alignItems: 'stretch',
 	    },
 	    hiddenSizer: {
-	        opacity: 0.1,
-	    }
+	        display: 'inline-block',
+	        position: 'absolute',
+	        opacity: 0,
+	    },
+	    xButton: {
+	        fontSize: '1.3rem',
+	        paddingLeft: 8,
+	        textDecoration: 'none',
+	        color: '#444',
+	    },
 	};
 	var ControlsComponent = (function (_super) {
 	    __extends(ControlsComponent, _super);
 	    function ControlsComponent(props, context) {
 	        _super.call(this, props, context);
+	        this.mouseMoveListener = null;
+	        this.mouseDownListener = null;
 	        this.state = {
 	            newMessage: new Message_1.Message(),
+	            mouseX: 0,
+	            mouseY: 0,
+	            opened: false,
 	        };
 	    }
+	    ControlsComponent.prototype.componentDidMount = function () {
+	        var _this = this;
+	        this.mouseMoveListener = function (event) {
+	            if (!_this.state.opened) {
+	                _this.setState({
+	                    mouseX: event.pageX,
+	                    mouseY: event.pageY,
+	                });
+	            }
+	        };
+	        this.mouseDownListener = function (event) {
+	            _this.setState({
+	                opened: !_this.state.opened,
+	                mouseX: event.pageX,
+	                mouseY: event.pageY,
+	            });
+	        };
+	        document.addEventListener('mousemove', this.mouseMoveListener);
+	        document.addEventListener('mousedown', this.mouseDownListener);
+	    };
+	    ControlsComponent.prototype.componentWillUnmount = function () {
+	        if (this.mouseMoveListener) {
+	            document.removeEventListener('mousemove', this.mouseMoveListener);
+	            this.mouseMoveListener = null;
+	        }
+	        if (this.mouseDownListener) {
+	            document.removeEventListener('mousedown', this.mouseDownListener);
+	            this.mouseDownListener = null;
+	        }
+	    };
+	    ControlsComponent.prototype.componentDidUpdate = function () {
+	        // Update hidden representation, dont need to trigger update
+	        this.state.newMessage.width = this.hiddenSizer.offsetWidth;
+	        this.state.newMessage.height = this.hiddenSizer.offsetHeight;
+	    };
+	    ControlsComponent.prototype.createMessage = function (msg) {
+	        if (!msg.text)
+	            return;
+	        msg.x = this.state.mouseX + OFFSET_MOUSE + styles.container.padding;
+	        // Make bottom left of screen be (0, 0)
+	        msg.y = window.innerHeight - (this.state.mouseY + OFFSET_MOUSE + styles.container.padding);
+	        this.props.createMessage(msg);
+	        this.setState({
+	            newMessage: new Message_1.Message(),
+	        });
+	        this.textElem.focus();
+	    };
+	    ControlsComponent.prototype.handleKeyPress = function (event) {
+	        if (event.key === 'Enter') {
+	            this.createMessage(this.state.newMessage);
+	        }
+	    };
 	    ControlsComponent.prototype.handleChange = function (event) {
 	        this.setState({
 	            newMessage: this.state.newMessage.setText(event.target.value),
 	        });
 	    };
-	    ControlsComponent.prototype.createMessage = function (msg) {
-	        this.props.createMessage(msg);
+	    ControlsComponent.prototype.handleManualClose = function () {
 	        this.setState({
-	            newMessage: new Message_1.Message(),
+	            opened: false,
 	        });
 	    };
 	    ControlsComponent.prototype.render = function () {
 	        var _this = this;
-	        return (React.createElement("div", null, React.createElement("input", {type: "text", value: this.state.newMessage.text, onChange: function (event) { return _this.handleChange(event); }}), React.createElement("button", {onClick: function () { return _this.createMessage(_this.state.newMessage); }}, "Add Greeting: ", this.state.newMessage.text), React.createElement("div", {style: styles.hiddenSizer}, this.state.newMessage.text)));
+	        var style = Object.assign({}, styles.container, {
+	            top: this.state.mouseY + OFFSET_MOUSE,
+	            left: this.state.mouseX + OFFSET_MOUSE,
+	            opacity: this.state.opened ? 1 : 0.15,
+	        });
+	        var specialStyles = Message_1.SpecialStyles(this.state.newMessage);
+	        var sizeStyle = Object.assign({}, styles.hiddenSizer, specialStyles);
+	        return (React.createElement("div", {style: style, onMouseDown: function (e) {
+	            e.stopPropagation();
+	            e.nativeEvent.stopImmediatePropagation();
+	        }}, React.createElement("input", {type: "text", value: this.state.newMessage.text, onChange: function (event) { return _this.handleChange(event); }, onKeyPress: function (event) { return _this.handleKeyPress(event); }, className: "display-message", style: specialStyles, ref: function (h) { return _this.textElem = h; }}), React.createElement("button", {className: "btn", onClick: function () { return _this.createMessage(_this.state.newMessage); }}, "Send"), React.createElement("div", {className: "display-message", style: styles.hiddenSizer, ref: function (h) { return _this.hiddenSizer = h; }}, this.state.newMessage.text), React.createElement("a", {href: "#", onMouseDown: function (e) {
+	            _this.handleManualClose();
+	            e.preventDefault();
+	        }, style: styles.xButton}, "×")));
 	    };
 	    return ControlsComponent;
 	}(React.Component));
