@@ -1,27 +1,49 @@
 
-# Server
+# Blockchat!
 
-The API Server
+A physics simulation chat program! All messages are anonymous and displayed in a 2d world, falling to the ground and stacking up on each other.
 
-### To Install
+I threw this together in a few hours with socket.io and ReactJS. The physics is done with [matter.js](http://brm.io/matter-js/).
+
+A demo should hopefully be running at http://blockchat.tablekat.net:3078/
+
+## Images
+
+![Example](http://i.imgur.com/4wFUYSN.gif)
+
+![Example](http://i.imgur.com/6kkJhGx.png)
+
+![Example](http://i.imgur.com/zc8YOXw.png)
+
+## To Install
 
 Run the following command in this folder:
 
     npm install
 
-### To Run
+And again, this time in wwwsrc folder:
 
-To run the API (make sure it's been built first):
+    npm install
 
-    npm run start
+### To Build
 
-To just build:
+To build the server, run in this folder:
 
     npm run tsc
 
+To build the client, run in wwwsrc:
 
-# WWW Client
+    npm run build
 
-In folder wwwsrc
+To rebuild on updates to the client:
 
-webpack, webpack --watch
+    npm run watch
+
+
+# To run
+
+In this folder:
+
+    npm run start
+
+Then open your browser to http://localhost:3078/
