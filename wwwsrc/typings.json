@@ -1,0 +1,12 @@
+{
+  "globalDependencies": {
+    "react": "registry:dt/react#0.14.0+20160602151522",
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "react-redux": "registry:dt/react-redux#4.4.0+20160501125835",
+    "react-router": "registry:dt/react-router#2.0.0+20160608101747",
+    "redux": "registry:dt/redux#3.3.1+20160326112656"
+  },
+  "dependencies": {
+    "react-router": "registry:npm/react-router#2.0.0+20160610174037"
+  }
+}

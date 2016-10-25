@@ -1,0 +1,38 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react"
+    },
+    "exclude": [
+        "node_modules",
+        "releases",
+        "typings/main",
+        "typings/main.d.ts"
+    ],
+    "compileOnSave": false,
+    "filesGlob": [
+        "./typings/index.d.ts",
+        "./src/app/**/*.ts",
+        "./src/app/**/*.tsx"
+    ],
+    "files": [
+        "./typings/index.d.ts",
+        "./src/app/actions/example.ts",
+        "./src/app/actions/index.ts",
+        "./src/app/reducers/example.ts",
+        "./src/app/reducers/index.ts",
+        "./src/app/app.tsx",
+        "./src/app/components/ControlsComponent/ControlsComponent.tsx",
+        "./src/app/components/MessageComponent/Message.tsx",
+        "./src/app/components/MessageComponent/MessageComponent.tsx",
+        "./src/app/containers/MessagesContainer/MessagesContainer.tsx",
+        "./src/app/containers/PageContainer/PageContainer.tsx"
+    ],
+    "atom": {
+        "rewriteTsconfig": true
+    }
+}
