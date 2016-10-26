@@ -9,11 +9,15 @@ A demo should hopefully be running at http://blockchat.tablekat.net:3078/
 
 ## Images
 
-![Example](http://i.imgur.com/4wFUYSN.gif)
+![Example](http://i.imgur.com/aAm7FIz.gif)
 
-![Example](http://i.imgur.com/6kkJhGx.png)
+![Example](http://i.imgur.com/ZuKl46B.png)
 
 ![Example](http://i.imgur.com/zc8YOXw.png)
+
+Old:
+
+![Example](http://i.imgur.com/4wFUYSN.gif)
 
 ## To Install
 
