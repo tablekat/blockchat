@@ -2,7 +2,7 @@
 import { Message } from './Message';
 import { EventEmitter } from 'events';
 var Matter = require('matter-js');
-var { World, Engine, Bodies } = Matter;
+var { World, Engine, Bodies, Body } = Matter;
 
 const TICK_RATE = 30;
 const GRAVITY = -0.6; //-0.2;
@@ -30,10 +30,11 @@ export class MessageSystem extends EventEmitter {
     this.messages.push(msg);
 
     var opts: any = {};
-    opts.force = { x: msg.dx / 300, y: msg.dy / 300 }; // can't set initial velocity mang...
+    //opts.force = { x: msg.dx / 300, y: msg.dy / 300 }; // can't set initial velocity mang...
     if(msg.density !== null) opts.density = msg.density;
 
     var rect = Bodies.rectangle(msg.x, msg.y, msg.width, msg.height, opts);
+    Body.setVelocity(rect, { x: msg.dx, y: msg.dy });
 
     msg.physBody = rect; // Hopefully this object will get reused!
     World.add(this.engine.world, rect);
@@ -46,11 +47,12 @@ export class MessageSystem extends EventEmitter {
 
     var now = new Date().getTime();
     var newMessages = [];
-    var msg;
+    var msg: Message;
     for(var i=0; i < this.messages.length; ++i){
       msg = this.messages[i];
       msg.x = msg.physBody.position.x;
       msg.y = msg.physBody.position.y;
+      msg.angle = msg.physBody.angle;
       if(now - msg.created < MAX_AGE){
         newMessages.push(msg);
       }else{

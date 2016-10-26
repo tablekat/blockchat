@@ -12,6 +12,7 @@ export class Message {
 
   public physBody: any = null;
   public density: number = null;
+  public angle: number = 0;
 
   constructor(args: any){
     if(!args) args = {};
@@ -24,6 +25,10 @@ export class Message {
     this.height = args.height || 0;
     this.created = new Date().getTime();
 
+    // transform so the point is in the center
+    this.x += this.width / 2;
+    this.y -= this.height / 2; // height is from top-left, so i guess minus?
+
     specials.forEach(special => {
       if(this.text.match(special.text)) {
         special.del(this);
@@ -34,12 +39,13 @@ export class Message {
   serializeable() {
     return {
       text: this.text,
-      x: this.x,
-      y: this.y,
+      x: this.x - this.width / 2,
+      y: this.y + this.height / 2,
       dx: this.dx,
       dy: this.dy,
       width: this.width,
       height: this.height,
+      angle: this.angle,
     }
   }
 

@@ -4,6 +4,7 @@ export class Message {
 
   public width: number = 0;
   public height: number = 0;
+  public angle: number = 0;
 
   constructor(public text: string = '',
               public x: number = 0,

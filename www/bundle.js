@@ -54,8 +54,8 @@
 	var ReactDOM = __webpack_require__(2);
 	var react_redux_1 = __webpack_require__(3);
 	var redux_1 = __webpack_require__(11);
-	var reducers_1 = __webpack_require__(89);
-	var PageContainer_1 = __webpack_require__(95);
+	var reducers_1 = __webpack_require__(28);
+	var PageContainer_1 = __webpack_require__(30);
 	var App = (function (_super) {
 	    __extends(App, _super);
 	    function App() {
@@ -1871,73 +1871,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */,
-/* 64 */,
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */,
-/* 69 */,
-/* 70 */,
-/* 71 */,
-/* 72 */,
-/* 73 */,
-/* 74 */,
-/* 75 */,
-/* 76 */,
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */,
-/* 88 */,
-/* 89 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var redux_1 = __webpack_require__(11);
-	var example_1 = __webpack_require__(90);
+	var example_1 = __webpack_require__(29);
 	var appReducer = redux_1.combineReducers({
 	    greetings: example_1.default,
 	});
@@ -1946,7 +1885,7 @@
 
 
 /***/ },
-/* 90 */
+/* 29 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1987,11 +1926,7 @@
 
 
 /***/ },
-/* 91 */,
-/* 92 */,
-/* 93 */,
-/* 94 */,
-/* 95 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2001,8 +1936,8 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var React = __webpack_require__(1);
-	var ControlsComponent_1 = __webpack_require__(101);
-	var MessagesContainer_1 = __webpack_require__(99);
+	var ControlsComponent_1 = __webpack_require__(31);
+	var MessagesContainer_1 = __webpack_require__(33);
 	var styles = {
 	    container: {
 	        position: 'fixed',
@@ -2051,71 +1986,7 @@
 
 
 /***/ },
-/* 96 */,
-/* 97 */,
-/* 98 */
-/***/ function(module, exports) {
-
-	"use strict";
-	var Message = (function () {
-	    function Message(text, x, y, dx, dy) {
-	        if (text === void 0) { text = ''; }
-	        if (x === void 0) { x = 0; }
-	        if (y === void 0) { y = 0; }
-	        if (dx === void 0) { dx = 0; }
-	        if (dy === void 0) { dy = 0; }
-	        this.text = text;
-	        this.x = x;
-	        this.y = y;
-	        this.dx = dx;
-	        this.dy = dy;
-	        this.width = 0;
-	        this.height = 0;
-	    }
-	    Message.prototype.setText = function (t) {
-	        this.text = t;
-	        return this;
-	    };
-	    Message.prototype.setSize = function (width, height) {
-	        this.width = width;
-	        this.height = height;
-	        return this;
-	    };
-	    return Message;
-	}());
-	exports.Message = Message;
-	function SpecialStyles(msg) {
-	    if (msg.text.match(/fancy/)) {
-	        return {
-	            fontFamily: 'Lobster',
-	        };
-	    }
-	    if (msg.text.match(/(robot|bee+p|boop)/)) {
-	        return {
-	            fontFamily: 'Orbitron',
-	        };
-	    }
-	    if (msg.text.match(/(pencil)/)) {
-	        return {
-	            fontFamily: 'Homemade Apple',
-	        };
-	    }
-	    if (msg.text.match(/(heavy)/)) {
-	        return {
-	            fontWeight: 'bold',
-	        };
-	    }
-	    if (msg.text.match(/(light)/)) {
-	        return {
-	            opacity: 0.7,
-	        };
-	    }
-	}
-	exports.SpecialStyles = SpecialStyles;
-
-
-/***/ },
-/* 99 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2125,65 +1996,7 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var React = __webpack_require__(1);
-	var MessageComponent_1 = __webpack_require__(100);
-	var MessagesContainer = (function (_super) {
-	    __extends(MessagesContainer, _super);
-	    function MessagesContainer(props, context) {
-	        _super.call(this, props, context);
-	    }
-	    MessagesContainer.prototype.render = function () {
-	        return (React.createElement("div", null, this.props.messages.map(function (message, i) {
-	            return (React.createElement(MessageComponent_1.MessageComponent, {msg: message, key: 'msg' + i}));
-	        })));
-	    };
-	    return MessagesContainer;
-	}(React.Component));
-	exports.MessagesContainer = MessagesContainer;
-
-
-/***/ },
-/* 100 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var React = __webpack_require__(1);
-	var Message_1 = __webpack_require__(98);
-	var MessageComponent = (function (_super) {
-	    __extends(MessageComponent, _super);
-	    function MessageComponent() {
-	        _super.apply(this, arguments);
-	    }
-	    MessageComponent.prototype.render = function () {
-	        var style = Object.assign({}, {
-	            position: 'absolute',
-	            top: window.innerHeight - this.props.msg.y,
-	            left: this.props.msg.x,
-	            zIndex: 100,
-	        }, Message_1.SpecialStyles(this.props.msg));
-	        return (React.createElement("div", {className: "display-message", style: style}, this.props.msg.text));
-	    };
-	    return MessageComponent;
-	}(React.Component));
-	exports.MessageComponent = MessageComponent;
-
-
-/***/ },
-/* 101 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var __extends = (this && this.__extends) || function (d, b) {
-	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-	    function __() { this.constructor = d; }
-	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-	};
-	var React = __webpack_require__(1);
-	var Message_1 = __webpack_require__(98);
+	var Message_1 = __webpack_require__(32);
 	var OFFSET_MOUSE = 15;
 	var styles = {
 	    container: {
@@ -2302,6 +2115,132 @@
 	    return ControlsComponent;
 	}(React.Component));
 	exports.ControlsComponent = ControlsComponent;
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var Message = (function () {
+	    function Message(text, x, y, dx, dy) {
+	        if (text === void 0) { text = ''; }
+	        if (x === void 0) { x = 0; }
+	        if (y === void 0) { y = 0; }
+	        if (dx === void 0) { dx = 0; }
+	        if (dy === void 0) { dy = 0; }
+	        this.text = text;
+	        this.x = x;
+	        this.y = y;
+	        this.dx = dx;
+	        this.dy = dy;
+	        this.width = 0;
+	        this.height = 0;
+	        this.angle = 0;
+	    }
+	    Message.prototype.setText = function (t) {
+	        this.text = t;
+	        return this;
+	    };
+	    Message.prototype.setSize = function (width, height) {
+	        this.width = width;
+	        this.height = height;
+	        return this;
+	    };
+	    return Message;
+	}());
+	exports.Message = Message;
+	function SpecialStyles(msg) {
+	    if (msg.text.match(/fancy/)) {
+	        return {
+	            fontFamily: 'Lobster',
+	        };
+	    }
+	    if (msg.text.match(/(robot|bee+p|boop)/)) {
+	        return {
+	            fontFamily: 'Orbitron',
+	        };
+	    }
+	    if (msg.text.match(/(pencil)/)) {
+	        return {
+	            fontFamily: 'Homemade Apple',
+	        };
+	    }
+	    if (msg.text.match(/(heavy)/)) {
+	        return {
+	            fontWeight: 'bold',
+	        };
+	    }
+	    if (msg.text.match(/(light)/)) {
+	        return {
+	            opacity: 0.7,
+	        };
+	    }
+	}
+	exports.SpecialStyles = SpecialStyles;
+
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var React = __webpack_require__(1);
+	var MessageComponent_1 = __webpack_require__(34);
+	var MessagesContainer = (function (_super) {
+	    __extends(MessagesContainer, _super);
+	    function MessagesContainer(props, context) {
+	        _super.call(this, props, context);
+	    }
+	    MessagesContainer.prototype.render = function () {
+	        return (React.createElement("div", null, this.props.messages.map(function (message, i) {
+	            return (React.createElement(MessageComponent_1.MessageComponent, {msg: message, key: 'msg' + i}));
+	        })));
+	    };
+	    return MessagesContainer;
+	}(React.Component));
+	exports.MessagesContainer = MessagesContainer;
+
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var React = __webpack_require__(1);
+	var Message_1 = __webpack_require__(32);
+	var MessageComponent = (function (_super) {
+	    __extends(MessageComponent, _super);
+	    function MessageComponent() {
+	        _super.apply(this, arguments);
+	    }
+	    MessageComponent.prototype.render = function () {
+	        var angle = (this.props.msg.angle || 0) / Math.PI * 180;
+	        var style = Object.assign({}, {
+	            position: 'absolute',
+	            top: window.innerHeight - this.props.msg.y,
+	            left: this.props.msg.x,
+	            zIndex: 100,
+	            width: this.props.msg.width + 2,
+	            boxSizing: 'border-box',
+	            transformOrigin: 'center',
+	            transform: "rotate(" + angle + "deg)",
+	        }, Message_1.SpecialStyles(this.props.msg));
+	        return (React.createElement("div", {className: "display-message", style: style}, this.props.msg.text));
+	    };
+	    return MessageComponent;
+	}(React.Component));
+	exports.MessageComponent = MessageComponent;
 
 
 /***/ }
